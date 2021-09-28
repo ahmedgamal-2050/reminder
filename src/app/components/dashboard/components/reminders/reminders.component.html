@@ -70,10 +70,6 @@
               <img src="{{'../../../../../assets/icons/' + (task.pinned ? 'pin-warning' : 'pin') + '.svg'}}"
                    width="20" height="20" />
             </div>
-            <div class="col p-3 px-4 task-menu" (click)="openModal(task)"
-                 data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
-              <img src="../../../../../assets/icons/edit.svg" width="20" height="20" />
-            </div>
             <div class="col p-3 px-4 task-menu" (click)="archiveTask(task)"
                  data-bs-toggle="tooltip" data-bs-placement="top" title="Archive">
               <img src="../../../../../assets/icons/archive.svg" width="20" height="20" />

@@ -14,14 +14,14 @@
         <datalist id="categoryDataList">
           <option *ngFor="let category of categoryList" [value]="category">
         </datalist>
-        <div *ngIf="category?.invalid && (category?.dirty || category?.touched)" class="text-danger">
-          <div *ngIf="category.errors?.minlength">
+        <div *ngIf="category && category.invalid && (category.dirty || category.touched)" class="text-danger">
+          <div *ngIf="category.errors && category.errors.minlength">
             Category must be at least 3 characters.
           </div>
-          <div *ngIf="category.errors?.pattern">
+          <div *ngIf="category.errors && category.errors.pattern">
             Category must start with a character.
           </div>
-          <div *ngIf="category.errors?.maxLength">
+          <div *ngIf="category.errors && category.errors.maxLength">
             Category must be 50 characters maximum.
           </div>
         </div>

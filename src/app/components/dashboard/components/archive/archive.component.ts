@@ -89,6 +89,23 @@ export class ArchiveComponent implements OnInit {
     this.taskService.taskCompleted(task, this.taskList);
   }
 
+  deleteTask(task: Task) {
+    if (task.pinned) {
+      for (let i = 0; i < this.pinnedTaskList.length; i++) {
+        if (this.pinnedTaskList[i].id === task.id) {
+          this.pinnedTaskList.splice(i, 1);
+        }
+      }
+    } else {
+      for (let i = 0; i < this.archivedTaskList.length; i++) {
+        if (this.archivedTaskList[i].id === task.id) {
+          this.archivedTaskList.splice(i, 1);
+        }
+      }
+    }
+    this.taskService.deleteTask(task, this.taskList);
+  }
+
   search(searchValue: string) {
     if (searchValue) {
       this.filteredTaskList = this.taskService.search(searchValue, this.allArchiveTasks);

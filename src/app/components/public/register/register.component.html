@@ -22,16 +22,16 @@
               </div>
             </div>
             <div *ngIf="username?.invalid && (username?.dirty || username?.touched)" class="text-danger">
-              <div *ngIf="username.errors?.required">
+              <div *ngIf="username.errors && username.errors.required">
                 Username is required.
               </div>
-              <div *ngIf="username.errors?.minlength">
+              <div *ngIf="username.errors && username.errors.minlength">
                 Username must be at least 3 characters.
               </div>
-              <div *ngIf="username.errors?.maxLength">
+              <div *ngIf="username.errors && username.errors.maxLength">
                 Username must be 50 characters maximum.
               </div>
-              <div *ngIf="username.errors?.pattern">
+              <div *ngIf="username.errors && username.errors.pattern">
                 Username must start with a letter and remove all spaces.
               </div>
             </div>
@@ -51,13 +51,13 @@
               </div>
             </div>
             <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="text-danger">
-              <div *ngIf="password.errors?.required">
+              <div *ngIf="password.errors && password.errors.required">
                 Password is required.
               </div>
-              <div *ngIf="password.errors?.minlength">
+              <div *ngIf="password.errors && password.errors.minlength">
                 Password must be at least 5 characters.
               </div>
-              <div *ngIf="password.errors?.maxLength">
+              <div *ngIf="password.errors && password.errors.maxLength">
                 Password must be 50 characters maximum.
               </div>
             </div>

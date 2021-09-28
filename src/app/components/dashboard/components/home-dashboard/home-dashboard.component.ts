@@ -98,4 +98,24 @@ export class HomeDashboardComponent implements OnInit {
     }
   }
 
+  onChangePrayerStatus(prayer: Prayer) {
+    localStorage.removeItem('todayPrayers');
+    for (let i = 0; i < this.todayPrayers.length; i++) {
+      if (this.todayPrayers[i].name === prayer.name) {
+        switch (prayer.status) {
+          case 'done':
+            this.todayPrayers[i].status = 'missed';
+            break;
+          case 'time':
+            this.todayPrayers[i].status = 'done';
+            break;
+          case 'missed':
+            this.todayPrayers[i].status = 'done';
+            break;
+        }
+      }
+    }
+    localStorage.setItem('todayPrayers', JSON.stringify(this.todayPrayers));
+  }
+
 }

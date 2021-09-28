@@ -11,16 +11,16 @@
                placeholder="Task Name" formControlName="taskName"
                [ngClass]="taskName?.invalid && (taskName?.dirty || taskName?.touched) ? 'border-danger':''">
         <div *ngIf="taskName?.invalid && (taskName?.dirty || taskName?.touched)" class="text-danger">
-          <div *ngIf="taskName.errors?.required">
+          <div *ngIf="taskName.errors && taskName.errors.required">
             Task Name is required.
           </div>
-          <div *ngIf="taskName.errors?.minlength">
+          <div *ngIf="taskName.errors && taskName.errors.minlength">
             Task Name must be at least 3 characters.
           </div>
-          <div *ngIf="taskName.errors?.maxLength">
+          <div *ngIf="taskName.errors && taskName.errors.maxLength">
             Task Name must be 50 characters maximum.
           </div>
-          <div *ngIf="taskName.errors?.pattern">
+          <div *ngIf="taskName.errors && taskName.errors.pattern">
             Task Name must start with a character.
           </div>
         </div>
@@ -31,13 +31,13 @@
                placeholder="Category" formControlName="category"
                [ngClass]="category?.invalid && (category?.dirty || category?.touched) ? 'border-danger':''">
         <div *ngIf="category?.invalid && (category?.dirty || category?.touched)" class="text-danger">
-          <div *ngIf="category.errors?.minlength">
+          <div *ngIf="category.errors && category.errors.minlength">
             Category must be at least 3 characters.
           </div>
-          <div *ngIf="category.errors?.maxLength">
+          <div *ngIf="category.errors && category.errors.maxLength">
             Category must be 50 characters maximum.
           </div>
-          <div *ngIf="category.errors?.maxLength">
+          <div *ngIf="category.errors && category.errors.maxLength">
             Category must be 50 characters maximum.
           </div>
         </div>

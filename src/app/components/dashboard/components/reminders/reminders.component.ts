@@ -129,6 +129,70 @@ export class RemindersComponent implements OnInit {
     this.taskService.togglePinTask(task, this.taskList);
   }
 
+  archiveTask(task: Task) {
+    let reminderDate: number = parseInt(moment(task.reminder, "yyyy-MM-DD").format("yyyyMMDD"));
+    if (task.pinned) {
+      for (let i = 0; i < this.pinnedTaskList.length; i++) {
+        if (this.pinnedTaskList[i].id === task.id) {
+          this.pinnedTaskList.splice(i, 1);
+        }
+      }
+    } else {
+      if (reminderDate < this.today) {
+        for (let i = 0; i < this.pastTasks.length; i++) {
+          if (this.pastTasks[i].id === task.id) {
+            this.pastTasks.splice(i, 1);
+          }
+        }
+      } else if (reminderDate === this.today) {
+        for (let i = 0; i < this.todayTasks.length; i++) {
+          if (this.todayTasks[i].id === task.id) {
+            this.todayTasks.splice(i, 1);
+          }
+        }
+      } else if (reminderDate > this.today) {
+        for (let i = 0; i < this.futureTasks.length; i++) {
+          if (this.futureTasks[i].id === task.id) {
+            this.futureTasks.splice(i, 1);
+          }
+        }
+      }
+    }
+    this.taskService.archiveTask(task, this.taskList);
+  }
+
+  deleteTask(task: Task) {
+    let reminderDate: number = parseInt(moment(task.reminder, "yyyy-MM-DD").format("yyyyMMDD"));
+    if (task.pinned) {
+      for (let i = 0; i < this.pinnedTaskList.length; i++) {
+        if (this.pinnedTaskList[i].id === task.id) {
+          this.pinnedTaskList.splice(i, 1);
+        }
+      }
+    } else {
+      if (reminderDate < this.today) {
+        for (let i = 0; i < this.pastTasks.length; i++) {
+          if (this.pastTasks[i].id === task.id) {
+            this.pastTasks.splice(i, 1);
+          }
+        }
+      } else if (reminderDate === this.today) {
+        for (let i = 0; i < this.todayTasks.length; i++) {
+          if (this.todayTasks[i].id === task.id) {
+            this.todayTasks.splice(i, 1);
+          }
+        }
+      } else if (reminderDate > this.today) {
+        for (let i = 0; i < this.futureTasks.length; i++) {
+          if (this.futureTasks[i].id === task.id) {
+            this.futureTasks.splice(i, 1);
+          }
+        }
+      }
+    }
+    this.taskService.deleteTask(task, this.taskList);
+  }
+
   onReminderChange(task: Task) {
 
   }
