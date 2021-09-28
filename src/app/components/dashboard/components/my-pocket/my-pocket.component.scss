@@ -1,0 +1,12 @@
+.task-menu {
+  cursor: pointer;
+
+  &:hover {
+    background-color: #457AFB33;
+  }
+}
+
+.pinned {
+  border-left-width: 15px !important;
+  border-left-color: orange !important;
+}

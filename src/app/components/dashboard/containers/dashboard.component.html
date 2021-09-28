@@ -1,0 +1,95 @@
+<div class="row mx-0">
+  <div [ngStyle]="{'width.px': (!shrink? 280 : 50)}" class="px-0 h-100vh fixed-top">
+    <div class="d-flex flex-column flex-shrink-0 text-white bg-dark h-100">
+      <div class="p-3 bg-light">
+        <div class="d-flex justify-content-between">
+          <div [ngClass]="{'d-none': shrink}">
+            <img src="../../assets/logo.png" width="18" height="18" />
+            <span class="ps-1 text-dark">Reminders</span>
+          </div>
+          <div class="btn p-0" (click)="menuShrink()">
+            <img src="../../assets/icons/setting.svg" width="18" height="18" />
+          </div>
+        </div>
+      </div>
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a class="nav-link py-3 text-white" routerLink="prayer" routerLinkActive="active">
+            <img src="../../assets/icons/prayer.svg" width="16" height="16" />
+            <span class="ms-2" [ngClass]="{'d-none': shrink}">Prayer</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="home-dashboard" routerLinkActive="active" class="nav-link py-3 text-white">
+            <img src="../../assets/icons/dashboard.svg" width="16" height="16" />
+            <span class="ms-2" [ngClass]="{'d-none': shrink}">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link py-3 text-white" routerLink="tasks" routerLinkActive="active">
+            <img src="../../assets/icons/tasks.svg" width="16" height="16" />
+            <span class="ms-2" [ngClass]="{'d-none': shrink}">Tasks</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="reminders" routerLinkActive="active" class="nav-link py-3 text-white">
+            <img src="../../assets/icons/time.svg" width="16" height="16" />
+            <span class="ms-2" [ngClass]="{'d-none': shrink}">Reminders</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="my-pocket" routerLinkActive="active" class="nav-link py-3 text-white">
+            <img src="../../assets/icons/pocket.svg" width="16" height="16" />
+            <span class="ms-2" [ngClass]="{'d-none': shrink}">My Pocket</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="categories" routerLinkActive="active" class="nav-link py-3 text-white">
+            <img src="../../assets/icons/categories.svg" width="16" height="16" />
+            <span class="ms-2" [ngClass]="{'d-none': shrink}">Categories</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="archive" routerLinkActive="active" class="nav-link py-3 text-white">
+            <img src="../../assets/icons/archive.svg" width="16" height="16" />
+            <span class="ms-2" [ngClass]="{'d-none': shrink}">Archive</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="trash" routerLinkActive="active" class="nav-link py-3 text-white">
+            <img src="../../assets/icons/trash.svg" width="16" height="16" />
+            <span class="ms-2" [ngClass]="{'d-none': shrink}">Trash</span>
+          </a>
+        </li>
+      </ul>
+      <div class="mx-auto py-3 clickable" (click)="logout()" *ngIf="shrink">
+        <img src="../../assets/icons/logout.svg" width="20" height="20" />
+      </div>
+      <div>
+        <a routerLink="profile" [ngClass]="shrink ? 'px-2': 'px-3'" routerLinkActive="bg-primary"
+           class="text-white text-decoration-none py-3 profile-href d-inline-block w-100">
+          <div class="row justify-content-between align-items-center">
+            <div class="col">
+              <span class="d-inline-block">
+                <img style="height:34px;width:34px;" height="34" width="34" class="img-fluid rounded-circle border"
+                     src="{{currentUser.profilePic ? currentUser.profilePic : '../../assets/icons/profile.svg'}}"/>
+              </span>
+              <span class="ms-2" [ngClass]="{'d-none': shrink}">{{ currentUser.username | titlecase }}</span>
+            </div>
+            <div class="col-auto" (click)="logout()" *ngIf="!shrink">
+              <img src="../../assets/icons/logout.svg" width="20" height="20" />
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div [ngStyle]="{'width.px': (!shrink? 280 : 50)}" class="col-auto">
+  </div>
+  <div class="col">
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

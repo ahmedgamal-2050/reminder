@@ -1,0 +1,56 @@
+<form [formGroup]="taskForm" (submit)="submitTask()" novalidate>
+  <div class="modal-header">
+    <h5 class="modal-title" id="staticBackdropLabel">{{ selectedTask ? 'Edit' : 'Create'}} Task</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12 mb-3">
+        <label for="taskName" class="mb-1">Task Name <span class="text-danger">*</span></label>
+        <input type="text" id="taskName" class="form-control"
+               placeholder="Task Name" formControlName="taskName"
+               [ngClass]="taskName?.invalid && (taskName?.dirty || taskName?.touched) ? 'border-danger':''">
+        <div *ngIf="taskName?.invalid && (taskName?.dirty || taskName?.touched)" class="text-danger">
+          <div *ngIf="taskName.errors?.required">
+            Task Name is required.
+          </div>
+          <div *ngIf="taskName.errors?.minlength">
+            Task Name must be at least 3 characters.
+          </div>
+          <div *ngIf="taskName.errors?.maxLength">
+            Task Name must be 50 characters maximum.
+          </div>
+          <div *ngIf="taskName.errors?.pattern">
+            Task Name must start with a character.
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mb-3">
+        <label for="category" class="mb-1">Category <span class="text-danger">*</span></label>
+        <input type="text" id="category" class="form-control"
+               placeholder="Category" formControlName="category"
+               [ngClass]="category?.invalid && (category?.dirty || category?.touched) ? 'border-danger':''">
+        <div *ngIf="category?.invalid && (category?.dirty || category?.touched)" class="text-danger">
+          <div *ngIf="category.errors?.minlength">
+            Category must be at least 3 characters.
+          </div>
+          <div *ngIf="category.errors?.maxLength">
+            Category must be 50 characters maximum.
+          </div>
+          <div *ngIf="category.errors?.maxLength">
+            Category must be 50 characters maximum.
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mb-3">
+        <label for="reminder" class="mb-1">Reminder (Optional)</label>
+        <input type="date" id="reminder" class="form-control"
+               placeholder="mm/dd/yyyy" formControlName="reminder">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </div>
+</form>

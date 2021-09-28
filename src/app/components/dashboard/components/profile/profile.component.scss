@@ -1,0 +1,18 @@
+.camera-bg {
+  position: absolute;
+  padding: 0.25rem 1.5rem;
+  background-color: #ffffff40;
+  z-index: 1;
+  cursor: not-allowed;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  &:hover {
+    background-color: #ffffff80;
+  }
+}
+
+input:read-only {
+  cursor: not-allowed;
+}

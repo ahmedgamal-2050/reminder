@@ -1,0 +1,89 @@
+<!-- Search -->
+<div class="row justify-content-center align-items-center p-5">
+  <div class="col-lg-6 col-md-8 col-sm-10">
+    <div class="alert-primary p-2 input-search-group">
+      <span class="search-icon">
+        <img src="../../../../../assets/icons/search.svg" width="20" height="20" />
+      </span>
+      <input type="text" class="ps-2 form-search-control text-primary"
+             placeholder="Search Category Name..." [(ngModel)]="searchValue"
+             (input)="search(searchValue)">
+    </div>
+  </div>
+</div>
+<!-- Page Content -->
+<!-- Create New Category -->
+<div class="row mx-auto justify-content-between rounded w-75 create-category mb-2 clickable"
+     (click)="openCategoryModal()">
+  <div class="col p-3">
+    <img src="../../../../../assets/icons/tag-primary.svg" width="20" height="20" />
+    <span class="ps-3">Create New Category</span>
+  </div>
+</div>
+<!-- Filtered Category List -->
+<div *ngIf="filteredCategoryList?.length && searchValue">
+  <div class="row mx-auto justify-content-between rounded w-75 border alert-primary mb-2"
+       *ngFor="let category of filteredCategoryList">
+    <!-- Left Menu Side -->
+    <div class="col-auto p-3">
+      <div class="d-flex align-items-center">
+        <img src="../../../../../assets/icons/tag-primary.svg" width="20" height="20" />
+        <div class="ms-3 text-primary">
+          {{category}}
+        </div>
+      </div>
+    </div>
+    <!-- Right Menu Side -->
+    <div class="col-auto d-flex">
+      <!-- More Actions -->
+      <div class="col-auto row">
+        <div class="col-auto p-3 clickable" (click)="deleteCategory(category)"
+             data-bs-toggle="tooltip" data-bs-placement="top" title="Remove">
+          <img src="../../../../../assets/icons/minus.svg" width="20" height="20" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Filtered Category Error Msg -->
+<div *ngIf="!filteredCategoryList?.length && searchValue" class="py-3">
+  <div class="alert alert-danger w-75 mx-auto">
+    There is no category with that name!!
+  </div>
+</div>
+<!-- All Category List -->
+<div *ngIf="!filteredCategoryList?.length && !searchValue">
+  <div class="row mx-auto justify-content-between rounded w-75 border alert-primary mb-2"
+       *ngFor="let category of categoryList">
+    <!-- Left Menu Side -->
+    <div class="col-auto p-3">
+      <div class="d-flex align-items-center">
+        <img src="../../../../../assets/icons/tag-primary.svg" width="20" height="20" />
+        <div class="ms-3 text-primary">
+          {{category}}
+        </div>
+      </div>
+    </div>
+    <!-- Right Menu Side -->
+    <div class="col-auto d-flex">
+      <!-- More Actions -->
+      <div class="col-auto row">
+        <div class="col-auto p-3 clickable" (click)="deleteCategory(category)"
+             data-bs-toggle="tooltip" data-bs-placement="top" title="Remove">
+          <img src="../../../../../assets/icons/minus.svg" width="20" height="20" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create Category Modal -->
+<div class="modal fade" id="categoryModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <app-add-categories (addCategory)="createCategory($event)"
+                          [categoryList]="categoryList">
+      </app-add-categories>
+    </div>
+  </div>
+</div>

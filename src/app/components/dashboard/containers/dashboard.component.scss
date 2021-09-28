@@ -1,0 +1,23 @@
+.nav-link {
+  border-radius: unset !important;
+
+  &:hover {
+    background-color: #ffffff55;
+  }
+}
+
+.nav-link.active {
+  background-color: #ffffff33;
+
+  img, svg {
+    transform: rotate(-20deg);
+  }
+}
+
+.profile-href {
+  background-color: #ffffff33;
+
+  &:hover {
+    background-color: #ffffff55;
+  }
+}
