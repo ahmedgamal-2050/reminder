@@ -97,7 +97,8 @@
         <div class="col-auto" *ngIf="task.showMenu && !task.colorMenu">
           <div class="row">
             <div class="col p-3 px-4 task-menu"
-                 data-bs-toggle="tooltip" data-bs-placement="top" title="Reminder">
+                 data-bs-toggle="tooltip" data-bs-placement="top" title="Reminder"
+                 (click)="openReminderModal(task)">
               <img src="../../../../../assets/icons/time.svg" width="20" height="20" />
             </div>
             <div class="col p-3 px-4 task-menu" (click)="togglePinTask(task)" *ngIf="!task.deleted"
@@ -211,7 +212,7 @@
         <div class="col-auto" *ngIf="task.showMenu && !task.colorMenu">
           <div class="row">
             <div class="col p-3 px-4 task-menu"
-                 data-bs-toggle="tooltip" data-bs-placement="top" title="Reminder">
+                 data-bs-toggle="tooltip" data-bs-placement="top" title="Reminder" (click)="openReminderModal(task)">
               <img src="../../../../../assets/icons/time.svg" width="20" height="20" />
             </div>
             <div class="col p-3 px-4 task-menu" (click)="togglePinTask(task)" *ngIf="!task.deleted"
@@ -263,6 +264,17 @@
                      [taskList]="taskList"
                      [selectedTask]="selectedTask">
       </app-edit-task>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Reminder Task Modal -->
+<div class="modal fade" id="reminderModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <app-edit-reminder [selectedTask]="selectedTask"
+                         (edit)="editReminder($event)">
+      </app-edit-reminder>
     </div>
   </div>
 </div>

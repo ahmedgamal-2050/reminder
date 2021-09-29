@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import moment from 'moment';
 import { TaskService } from '../task.service';
 import { Task } from '../tasks';
+declare let $: any;
 
 @Component({
   selector: 'app-reminders',
@@ -19,6 +20,7 @@ export class RemindersComponent implements OnInit {
   public filteredTaskList: Task[] = [];
   public searchValue: string = '';
   public filteredReminderTasks: Task[] = [];
+  public selectedTask!: Task;
 
   constructor(private taskService: TaskService) { }
 
@@ -203,6 +205,58 @@ export class RemindersComponent implements OnInit {
     } else {
       this.filteredTaskList = [];
     }
+  }
+
+  openReminderModal(task: Task) {
+    this.selectedTask = task
+    $("#reminderModal").modal('show');
+  }
+
+  editReminder(task: Task) {
+    let reminderDate: number = parseInt(moment(task.reminder, "yyyy-MM-DD").format("yyyyMMDD"));
+    let oldReminderDate: number = 0;
+    this.taskList = this.taskService.getTaskList();
+    if (task.pinned) {
+      for (let i = 0; i < this.pinnedTaskList.length; i++) {
+        if (this.pinnedTaskList[i].id === task.id && this.pinnedTaskList[i].reminder !== task.reminder) {
+          this.pinnedTaskList[i].reminder = task.reminder;
+        }
+      }
+    } else {
+      for (let i = 0; i < this.taskList.length; i++) {
+        if (this.taskList[i].id === task.id) {
+          oldReminderDate = parseInt(moment(this.taskList[i].reminder, "yyyy-MM-DD").format("yyyyMMDD"));
+          if (oldReminderDate < this.today) {
+            for (let i = 0; i < this.pastTasks.length; i++) {
+              if (this.pastTasks[i].id === task.id) {
+                this.pastTasks.splice(i, 1);
+              }
+            }
+          } else if (oldReminderDate === this.today) {
+            for (let i = 0; i < this.todayTasks.length; i++) {
+              if (this.todayTasks[i].id === task.id) {
+                this.todayTasks.splice(i, 1);
+              }
+            }
+          } else if (oldReminderDate > this.today) {
+            for (let i = 0; i < this.futureTasks.length; i++) {
+              if (this.futureTasks[i].id === task.id) {
+                this.futureTasks.splice(i, 1);
+              }
+            }
+          }
+        }
+      }
+      if (reminderDate < this.today) {
+        this.pastTasks.push(task);
+      } else if (reminderDate === this.today) {
+        this.todayTasks.push(task);
+      } else if (reminderDate > this.today) {
+        this.futureTasks.push(task);
+      }
+    }
+    this.taskService.editReminder(task, this.taskList);
+    $("#reminderModal").modal('hide');
   }
 }
 

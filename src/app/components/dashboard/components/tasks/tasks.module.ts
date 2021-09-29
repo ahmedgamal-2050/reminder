@@ -4,6 +4,7 @@ import { TasksComponent } from './tasks.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
+import { SharedModule } from '../../shared/shared.module';
 
 const tasksRoutes: Routes = [
   {
@@ -21,7 +22,8 @@ const tasksRoutes: Routes = [
     CommonModule,
     RouterModule.forChild(tasksRoutes),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class TasksModule { }

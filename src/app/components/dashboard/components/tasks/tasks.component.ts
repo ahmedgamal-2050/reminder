@@ -85,4 +85,14 @@ export class TasksComponent implements OnInit {
       this.filteredTaskList = [];
     }
   }
+
+  openReminderModal(task: Task) {
+    this.selectedTask = task
+    $("#reminderModal").modal('show');
+  }
+
+  editReminder(task: Task) {
+    this.taskService.editReminder(task, this.taskList);
+    $("#reminderModal").modal('hide');
+  }
 }

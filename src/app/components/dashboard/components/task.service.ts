@@ -123,4 +123,24 @@ export class TaskService {
       return (task.taskName.toLowerCase().indexOf(searchValue.toLowerCase() as string) > -1);
     })
   }
+
+  editReminder(task: Task, taskList: Task[]) {
+    let reminderDateNumber: number;
+    let today: number = parseInt(moment(new Date()).format("yyyyMMDD"));
+    for (let i = 0; i < taskList.length; i++) {
+      if (taskList[i].id === task.id) {
+        taskList[i].reminder = task.reminder;
+        taskList[i].showMenu = !task.showMenu;
+        if (taskList[i].reminder) {
+          reminderDateNumber = parseInt(moment(taskList[i].reminder, "yyyy-MM-DD").format("yyyyMMDD"));
+          if (reminderDateNumber === today) {
+            taskList[i].dateStatus = 'today';
+          } else {
+            taskList[i].dateStatus = '';
+          }
+        }
+      }
+    }
+    this.updateTask(taskList);
+  }
 }

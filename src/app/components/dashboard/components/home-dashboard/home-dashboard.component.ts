@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Prayer } from '../prayer/prayer';
 import { TaskService } from '../task.service';
 import { Task } from '../tasks';
+declare let $: any;
 
 @Component({
   selector: 'app-home-dashboard',
@@ -22,6 +23,7 @@ export class HomeDashboardComponent implements OnInit {
   public tasksNo: number = 0;
   public archiveNo: number = 0;
   public todayPrayers: Prayer[] = [];
+  public selectedTask!: Task;
 
   constructor(private taskService: TaskService) { }
 
@@ -116,6 +118,21 @@ export class HomeDashboardComponent implements OnInit {
       }
     }
     localStorage.setItem('todayPrayers', JSON.stringify(this.todayPrayers));
+  }
+
+  openReminderModal(task: Task) {
+    this.selectedTask = task
+    $("#reminderModal").modal('show');
+  }
+
+  editReminder(task: Task) {
+    for (let i = 0; i < this.todayTasks.length; i++) {
+      if (this.todayTasks[i].id === task.id && task.reminder) {
+        this.todayTasks.splice(i, 1);
+      }
+    }
+    this.taskService.editReminder(task, this.taskList);
+    $("#reminderModal").modal('hide');
   }
 
 }

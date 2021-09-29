@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../task.service';
 import { Task } from '../tasks';
+declare let $: any;
 
 @Component({
   selector: 'app-archive',
@@ -15,6 +16,7 @@ export class ArchiveComponent implements OnInit {
   public allArchiveTasks: Task[] = [];
   public searchValue: string = '';
   public colorList: string[] = ['light', 'info', 'primary', 'warning', 'danger', 'success', 'secondary'];
+  public selectedTask!: Task;
 
   constructor(private taskService: TaskService) { }
 
@@ -112,6 +114,29 @@ export class ArchiveComponent implements OnInit {
     } else {
       this.filteredTaskList = [];
     }
+  }
+
+  openReminderModal(task: Task) {
+    this.selectedTask = task
+    $("#reminderModal").modal('show');
+  }
+
+  editReminder(task: Task) {
+    this.taskService.editReminder(task, this.taskList);
+    if (task.pinned) {
+      for (let i = 0; i < this.pinnedTaskList.length; i++) {
+        if (this.pinnedTaskList[i].id === task.id) {
+          this.pinnedTaskList[i].reminder = task.reminder;
+        }
+      }
+    } else {
+      for (let i = 0; i < this.archivedTaskList.length; i++) {
+        if (this.archivedTaskList[i].id === task.id) {
+          this.archivedTaskList[i].reminder = task.reminder;
+        }
+      }
+    }
+    $("#reminderModal").modal('hide');
   }
 }
 
