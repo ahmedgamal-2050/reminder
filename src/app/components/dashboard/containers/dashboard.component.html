@@ -1,5 +1,5 @@
 <div class="row mx-0">
-  <div [ngStyle]="{'width.px': (!shrink? 280 : 50)}" class="px-0 h-100vh fixed-top">
+  <div [ngStyle]="{'width.px': (!shrink? 280 : 50)}" class="mx-0 px-0 h-100vh fixed-top">
     <div class="d-flex flex-column flex-shrink-0 text-white bg-dark h-100">
       <div class="p-3 bg-light">
         <div class="d-flex justify-content-between">
@@ -85,9 +85,9 @@
     </div>
   </div>
 
-  <div [ngStyle]="{'width.px': (!shrink? 280 : 50)}" class="col-auto">
+  <div [ngStyle]="{'width.px': (!shrink? '280' : '50')}" class="col-auto px-0">
   </div>
-  <div class="col">
+  <div class="col px-0" [ngStyle]="{'width': (!shrink? 'calc(100% - 280px)' : 'calc(100% - 50px)')}">
     <div class="container-fluid">
       <router-outlet></router-outlet>
     </div>

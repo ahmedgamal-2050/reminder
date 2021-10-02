@@ -247,8 +247,8 @@
       <!-- Prayers -->
       <div class="col-lg-6">
         <div class="prayer-dashboard">
-          <div class="d-flex float-start" *ngIf="todayPrayers">
-            <div class="col float-start mx-2 rounded-pill-top mb-3 px-5 text-center"
+          <div class="d-flex flex-row" *ngIf="todayPrayers">
+            <div class="col mx-2 rounded-pill-top mb-3 px-5 text-center"
                  *ngFor="let prayer of todayPrayers"
                  [ngClass]="prayer.background">
               <div class="py-5">

@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddCategoriesComponent implements OnInit {
   public categoryForm!: FormGroup;
-  public category: string = '';
+  public categoryName: string = '';
   @Input() public categoryList?: string[];
   @Output() public addCategory = new EventEmitter<string>();
 
@@ -29,12 +29,16 @@ export class AddCategoriesComponent implements OnInit {
 
   submitCategory() {
     if (this.categoryForm.dirty && this.categoryForm.valid) {
-      this.category = this.categoryForm.value.category;
-      this.addCategory.emit(this.category);
+      this.categoryName = this.categoryForm.value.category;
+      this.addCategory.emit(this.categoryName);
       this.categoryForm.reset();
     } else {
       this.categoryForm.markAsTouched();
       this.categoryForm.markAsDirty();
     }
+  }
+
+  get category() {
+    return this.categoryForm.get('username');
   }
 }

@@ -6,22 +6,22 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-12 mb-3">
-        <label for="category" class="mb-1">Category <span class="text-danger">*</span></label>
-        <input type="text" id="category" class="form-control"
+        <label class="mb-1">Category <span class="text-danger">*</span></label>
+        <input type="text" class="form-control"
                placeholder="Category" formControlName="category"
                [ngClass]="category?.invalid && (category?.dirty || category?.touched) ? 'border-danger':''"
                list="#categoryDataList">
         <datalist id="categoryDataList">
-          <option *ngFor="let category of categoryList" [value]="category">
+          <option *ngFor="let categoryTagName of categoryList" [value]="categoryTagName">
         </datalist>
-        <div *ngIf="category && category.invalid && (category.dirty || category.touched)" class="text-danger">
-          <div *ngIf="category.errors && category.errors.minlength">
+        <div *ngIf="category?.invalid && (category?.dirty || category?.touched)" class="text-danger">
+          <div *ngIf="category.errors?.minlength">
             Category must be at least 3 characters.
           </div>
-          <div *ngIf="category.errors && category.errors.pattern">
+          <div *ngIf="category.errors?.pattern">
             Category must start with a character.
           </div>
-          <div *ngIf="category.errors && category.errors.maxLength">
+          <div *ngIf="category.errors?.maxLength">
             Category must be 50 characters maximum.
           </div>
         </div>
