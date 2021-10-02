@@ -3,7 +3,7 @@
   <div class="col-lg-6 col-md-8 col-sm-10">
     <div class="alert-primary p-2 input-search-group">
       <span class="search-icon">
-        <img src="../../../../../assets/icons/search.svg" width="20" height="20" />
+        <img src="./assets/icons/search.svg" width="20" height="20" />
       </span>
       <input type="text" class="ps-2 form-search-control text-primary"
              placeholder="Search Task..." [(ngModel)]="searchValue" (input)="search(searchValue)">
@@ -12,7 +12,7 @@
 </div>
 <!-- Task Title -->
 <div class="bg-light p-3 mb-4 w-100">
-  <img src="../../../../../assets/icons/time.svg" width="20" height="20" />
+  <img src="./assets/icons/time.svg" width="20" height="20" />
   <span class="ms-2">Today</span>
 </div>
 <!-- Filtered Task Menu -->
@@ -48,7 +48,7 @@
             <div class="ms-3 border rounded-pill py-1-5 px-2 fs-8"
                  *ngIf="task.reminder && !task.done"
                  [ngClass]="task.deleted ?'alert-danger border-danger' : 'alert-primary border-primary'">
-              <img src="../../../../../assets/icons/time.svg" width="14" height="14" />
+              <img src="./assets/icons/time.svg" width="14" height="14" />
               <span class="ms-2">{{ task.dateStatus? task.dateStatus :  task.reminder | date:'dd MMM' }}</span>
             </div>
           </div>
@@ -60,20 +60,20 @@
         <div class="col-auto row me-2 align-items-center"
              *ngIf="(task.done || task.pinned || task.archived) && !task.showMenu && !task.colorMenu">
           <div class="col me-1" *ngIf="task.done">
-            <img src="../../../../../assets/icons/pocket-success.svg" width="20" height="20" />
+            <img src="./assets/icons/pocket-success.svg" width="20" height="20" />
           </div>
           <div class="col me-1" *ngIf="task.pinned">
-            <img src="../../../../../assets/icons/pin-warning.svg" width="20" height="20" />
+            <img src="./assets/icons/pin-warning.svg" width="20" height="20" />
           </div>
           <div class="col me-1" *ngIf="task.archived">
-            <img src="../../../../../assets/icons/archive-primary.svg" width="20" height="20" />
+            <img src="./assets/icons/archive-primary.svg" width="20" height="20" />
           </div>
         </div>
         <!-- More Actions -->
         <div class="bg-dark col-auto row">
           <div class="col-auto p-3 task-menu" (click)="toggleTaskMenu(task)"
                data-bs-toggle="tooltip" data-bs-placement="top" title="More">
-            <img src="../../../../../assets/icons/more.svg" width="20" height="20" />
+            <img src="./assets/icons/more.svg" width="20" height="20" />
           </div>
           <!-- Actions Menu -->
           <div class="col-auto" *ngIf="task.showMenu">
@@ -81,21 +81,21 @@
               <div class="col p-3 px-4 task-menu"
                    data-bs-toggle="tooltip" data-bs-placement="top" title="Reminder"
                    (click)="openReminderModal(task)">
-                <img src="../../../../../assets/icons/time.svg" width="20" height="20" />
+                <img src="./assets/icons/time.svg" width="20" height="20" />
               </div>
               <div class="col p-3 px-4 task-menu" (click)="togglePinTask(task)"
                    data-bs-toggle="tooltip" data-bs-placement="top" title="Pin">
-                <img src="{{'../../../../../assets/icons/' + (task.pinned ? 'pin-warning' : 'pin') + '.svg'}}"
+                <img src="{{'./assets/icons/' + (task.pinned ? 'pin-warning' : 'pin') + '.svg'}}"
                      width="20" height="20" />
               </div>
               <div class="col p-3 px-4 task-menu" (click)="archiveTask(task)"
                    data-bs-toggle="tooltip" data-bs-placement="top" title="Archive">
-                <img src="{{'../../../../../assets/icons/' + (task.archived ? 'archive-primary' : 'archive') + '.svg'}}"
+                <img src="{{'./assets/icons/' + (task.archived ? 'archive-primary' : 'archive') + '.svg'}}"
                      width="20" height="20" />
               </div>
               <div class="col p-3 px-4 task-menu" (click)="deleteTask(task)"
                    data-bs-toggle="tooltip" data-bs-placement="top" title="Trash">
-                <img src="../../../../../assets/icons/trash.svg" width="20" height="20" />
+                <img src="./assets/icons/trash.svg" width="20" height="20" />
               </div>
             </div>
           </div>
@@ -143,7 +143,7 @@
             <div class="ms-3 border rounded-pill py-1-5 px-2 fs-8"
                  *ngIf="task.reminder && !task.done"
                  [ngClass]="task.deleted ?'alert-danger border-danger' : 'alert-primary border-primary'">
-              <img src="../../../../../assets/icons/time.svg" width="14" height="14" />
+              <img src="./assets/icons/time.svg" width="14" height="14" />
               <span class="ms-2">{{ task.dateStatus? task.dateStatus :  task.reminder | date:'dd MMM' }}</span>
             </div>
           </div>
@@ -155,20 +155,20 @@
         <div class="col-auto row me-2 align-items-center"
              *ngIf="(task.done || task.pinned || task.archived) && !task.showMenu && !task.colorMenu">
           <div class="col me-1" *ngIf="task.done">
-            <img src="../../../../../assets/icons/pocket-success.svg" width="20" height="20" />
+            <img src="./assets/icons/pocket-success.svg" width="20" height="20" />
           </div>
           <div class="col me-1" *ngIf="task.pinned">
-            <img src="../../../../../assets/icons/pin-warning.svg" width="20" height="20" />
+            <img src="./assets/icons/pin-warning.svg" width="20" height="20" />
           </div>
           <div class="col me-1" *ngIf="task.archived">
-            <img src="../../../../../assets/icons/archive-primary.svg" width="20" height="20" />
+            <img src="./assets/icons/archive-primary.svg" width="20" height="20" />
           </div>
         </div>
         <!-- More Actions -->
         <div class="bg-dark col-auto row">
           <div class="col-auto p-3 task-menu" (click)="toggleTaskMenu(task)"
                data-bs-toggle="tooltip" data-bs-placement="top" title="More">
-            <img src="../../../../../assets/icons/more.svg" width="20" height="20" />
+            <img src="./assets/icons/more.svg" width="20" height="20" />
           </div>
           <!-- Actions Menu -->
           <div class="col-auto" *ngIf="task.showMenu">
@@ -176,21 +176,21 @@
               <div class="col p-3 px-4 task-menu"
                    data-bs-toggle="tooltip" data-bs-placement="top" title="Reminder"
                    (click)="openReminderModal(task)">
-                <img src="../../../../../assets/icons/time.svg" width="20" height="20" />
+                <img src="./assets/icons/time.svg" width="20" height="20" />
               </div>
               <div class="col p-3 px-4 task-menu" (click)="togglePinTask(task)"
                    data-bs-toggle="tooltip" data-bs-placement="top" title="Pin">
-                <img src="{{'../../../../../assets/icons/' + (task.pinned ? 'pin-warning' : 'pin') + '.svg'}}"
+                <img src="{{'./assets/icons/' + (task.pinned ? 'pin-warning' : 'pin') + '.svg'}}"
                      width="20" height="20" />
               </div>
               <div class="col p-3 px-4 task-menu" (click)="archiveTask(task)"
                    data-bs-toggle="tooltip" data-bs-placement="top" title="Archive">
-                <img src="{{'../../../../../assets/icons/' + (task.archived ? 'archive-primary' : 'archive') + '.svg'}}"
+                <img src="{{'./assets/icons/' + (task.archived ? 'archive-primary' : 'archive') + '.svg'}}"
                      width="20" height="20" />
               </div>
               <div class="col p-3 px-4 task-menu" (click)="deleteTask(task)"
                    data-bs-toggle="tooltip" data-bs-placement="top" title="Trash">
-                <img src="../../../../../assets/icons/trash.svg" width="20" height="20" />
+                <img src="./assets/icons/trash.svg" width="20" height="20" />
               </div>
             </div>
           </div>
@@ -209,7 +209,7 @@
           <div class="col-6 mb-3">
             <div class="alert-warning py-5">
               <div class="d-flex justify-content-center align-items-end mb-3">
-                <img src="../../../../../assets/icons/time.svg" width="40" height="40" />
+                <img src="./assets/icons/time.svg" width="40" height="40" />
                 <h5 class="text-warning mb-0 ms-1">{{remindersNo}}</h5>
               </div>
               <div class="text-warning text-center">Reminders</div>
@@ -218,7 +218,7 @@
           <div class="col-6 mb-3">
             <div class="alert-success py-5">
               <div class="d-flex justify-content-center align-items-end mb-3">
-                <img src="../../../../../assets/icons/pocket-success.svg" width="40" height="40" />
+                <img src="./assets/icons/pocket-success.svg" width="40" height="40" />
                 <h5 class="text-success mb-0 ms-1">{{pocketsNo}}</h5>
               </div>
               <div class="text-success text-center">Pocket</div>
@@ -227,7 +227,7 @@
           <div class="col-6 mb-3">
             <div class="alert-dark py-5">
               <div class="d-flex justify-content-center align-items-end mb-3">
-                <img src="../../../../../assets/icons/tasks.svg" width="40" height="40" />
+                <img src="./assets/icons/tasks.svg" width="40" height="40" />
                 <h5 class="text-dark mb-0 ms-1">{{tasksNo}}</h5>
               </div>
               <div class="text-dark text-center">Task</div>
@@ -236,7 +236,7 @@
           <div class="col-6 mb-3">
             <div class="alert-primary py-5">
               <div class="d-flex justify-content-center align-items-end mb-3">
-                <img src="../../../../../assets/icons/archive.svg" width="40" height="40" />
+                <img src="./assets/icons/archive.svg" width="40" height="40" />
                 <h5 class="text-primary mb-0 ms-1">{{archiveNo}}</h5>
               </div>
               <div class="text-primary text-center">Archive</div>
@@ -254,7 +254,7 @@
               <div class="py-5">
                 <div style="height:100px;width:100px" class="mx-auto">
                   <span *ngIf="prayer.status === 'time' || prayer.status === 'done'">
-                    <img src="{{'../../../../../assets/icons/'+ prayer.icon +'.svg'}}" width="100" height="100" />
+                    <img src="{{'./assets/icons/'+ prayer.icon +'.svg'}}" width="100" height="100" />
                   </span>
                 </div>
                 <h4 class="mt-5">{{ prayer.name }}</h4>
@@ -262,19 +262,19 @@
                 <div class="pt-3 mx-auto" style="height:32px;width:100px;">
                   <div *ngIf="prayer.status === 'done'">
                     <span class="alert-success rounded-pill py-1 px-2 clickable" (click)="onChangePrayerStatus(prayer)">
-                      <img src="../../../../../assets/icons/done.svg" width="20" height="20" />
+                      <img src="./assets/icons/done.svg" width="20" height="20" />
                       <span class="ms-2">Done</span>
                     </span>
                   </div>
                   <div *ngIf="prayer.status === 'time'">
                     <span class="alert-primary rounded-pill py-1 px-2 clickable" (click)="onChangePrayerStatus(prayer)">
-                      <img src="../../../../../assets/icons/time.svg" width="20" height="20" />
+                      <img src="./assets/icons/time.svg" width="20" height="20" />
                       <span class="ms-2">Time</span>
                     </span>
                   </div>
                   <div *ngIf="prayer.status === 'missed'">
                     <span class="alert-danger rounded-pill py-1 px-2 clickable" (click)="onChangePrayerStatus(prayer)">
-                      <img src="../../../../../assets/icons/miss.svg" width="20" height="20" />
+                      <img src="./assets/icons/miss.svg" width="20" height="20" />
                       <span class="ms-2">Miss</span>
                     </span>
                   </div>

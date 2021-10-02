@@ -3,7 +3,7 @@
   <div class="col-lg-6 col-md-8 col-sm-10">
     <div class="alert-primary p-2 input-search-group">
       <span class="search-icon">
-        <img src="../../../../../assets/icons/search.svg" width="20" height="20" />
+        <img src="./assets/icons/search.svg" width="20" height="20" />
       </span>
       <input type="text" class="ps-2 form-search-control text-primary"
              placeholder="Search Pocket Task..." [(ngModel)]="searchValue" (input)="search(searchValue)">
@@ -12,7 +12,7 @@
 </div>
 <!-- Page Title -->
 <div class="alert-success p-3 mb-4 w-100">
-  <img src="../../../../../assets/icons/pocket-success.svg" width="20" height="20" />
+  <img src="./assets/icons/pocket-success.svg" width="20" height="20" />
   <span class="ms-2 text-success">My Pocket</span>
 </div>
 <!-- Filtered Task Menu -->
@@ -38,34 +38,34 @@
       <div class="col-auto row me-2 align-items-center"
            *ngIf="task.done">
         <div class="col me-1" *ngIf="task.pinned">
-          <img src="../../../../../assets/icons/pin-warning.svg" width="20" height="20" />
+          <img src="./assets/icons/pin-warning.svg" width="20" height="20" />
         </div>
         <div class="col me-1">
-          <img src="../../../../../assets/icons/pocket-success.svg" width="20" height="20" />
+          <img src="./assets/icons/pocket-success.svg" width="20" height="20" />
         </div>
       </div>
       <!-- More Actions -->
       <div class="bg-dark col-auto row">
         <div class="col-auto p-3 task-menu" (click)="toggleTaskMenu(task)"
              data-bs-toggle="tooltip" data-bs-placement="top" title="More">
-          <img src="../../../../../assets/icons/more.svg" width="20" height="20" />
+          <img src="./assets/icons/more.svg" width="20" height="20" />
         </div>
         <!-- Actions Menu -->
         <div class="col-auto" *ngIf="task.showMenu">
           <div class="row">
             <div class="col p-3 px-4 task-menu" (click)="togglePinTask(task)" *ngIf="!task.deleted"
                  data-bs-toggle="tooltip" data-bs-placement="top" title="Pin">
-              <img src="{{'../../../../../assets/icons/' + (task.pinned ? 'pin-warning' : 'pin') + '.svg'}}"
+              <img src="{{'./assets/icons/' + (task.pinned ? 'pin-warning' : 'pin') + '.svg'}}"
                    width="20" height="20" />
             </div>
             <div class="col p-3 px-4 task-menu" (click)="archiveTask(task)" *ngIf="!task.deleted"
                  data-bs-toggle="tooltip" data-bs-placement="top" title="Archive">
-              <img src="{{'../../../../../assets/icons/' + (task.archived ? 'archive-primary' : 'archive') + '.svg'}}"
+              <img src="{{'./assets/icons/' + (task.archived ? 'archive-primary' : 'archive') + '.svg'}}"
                    width="20" height="20" />
             </div>
             <div class="col p-3 px-4 task-menu" (click)="deleteTask(task)"
                  data-bs-toggle="tooltip" data-bs-placement="top" title="Trash">
-              <img src="../../../../../assets/icons/trash.svg" width="20" height="20" />
+              <img src="./assets/icons/trash.svg" width="20" height="20" />
             </div>
           </div>
         </div>
@@ -103,34 +103,34 @@
       <div class="col-auto row me-2 align-items-center"
            *ngIf="task.done">
         <div class="col me-1" *ngIf="task.pinned">
-          <img src="../../../../../assets/icons/pin-warning.svg" width="20" height="20" />
+          <img src="./assets/icons/pin-warning.svg" width="20" height="20" />
         </div>
         <div class="col me-1">
-          <img src="../../../../../assets/icons/pocket-success.svg" width="20" height="20" />
+          <img src="./assets/icons/pocket-success.svg" width="20" height="20" />
         </div>
       </div>
       <!-- More Actions -->
       <div class="bg-dark col-auto row">
         <div class="col-auto p-3 task-menu" (click)="toggleTaskMenu(task)"
              data-bs-toggle="tooltip" data-bs-placement="top" title="More">
-          <img src="../../../../../assets/icons/more.svg" width="20" height="20" />
+          <img src="./assets/icons/more.svg" width="20" height="20" />
         </div>
         <!-- Actions Menu -->
         <div class="col-auto" *ngIf="task.showMenu">
           <div class="row">
             <div class="col p-3 px-4 task-menu" (click)="togglePinTask(task)" *ngIf="!task.deleted"
                  data-bs-toggle="tooltip" data-bs-placement="top" title="Pin">
-              <img src="{{'../../../../../assets/icons/' + (task.pinned ? 'pin-warning' : 'pin') + '.svg'}}"
+              <img src="{{'./assets/icons/' + (task.pinned ? 'pin-warning' : 'pin') + '.svg'}}"
                    width="20" height="20" />
             </div>
             <div class="col p-3 px-4 task-menu" (click)="archiveTask(task)" *ngIf="!task.deleted"
                  data-bs-toggle="tooltip" data-bs-placement="top" title="Archive">
-              <img src="{{'../../../../../assets/icons/' + (task.archived ? 'archive-primary' : 'archive') + '.svg'}}"
+              <img src="{{'./assets/icons/' + (task.archived ? 'archive-primary' : 'archive') + '.svg'}}"
                    width="20" height="20" />
             </div>
             <div class="col p-3 px-4 task-menu" (click)="deleteTask(task)"
                  data-bs-toggle="tooltip" data-bs-placement="top" title="Trash">
-              <img src="../../../../../assets/icons/trash.svg" width="20" height="20" />
+              <img src="./assets/icons/trash.svg" width="20" height="20" />
             </div>
           </div>
         </div>

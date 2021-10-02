@@ -2,7 +2,7 @@
   <form [formGroup]="loginForm" (submit)="login()" novalidate class="pt-5 mt-5">
     <div class="row mt-5 justify-content-center">
       <h3 class="text-center mb-5">
-        <img src="../../../../assets/logo.png" width="36" height="36" />
+        <img src="./assets/logo.png" width="36" height="36" />
         Reminders
       </h3>
       <div class="col-lg-6 col-md-8 col-sm-12">
@@ -14,7 +14,7 @@
             <div class="row mx-0 align-items-center bg-reminder input-reminder-group"
                  [ngClass]="username?.invalid && (username?.dirty || username?.touched) ? 'border border-danger':''">
               <div class="col-auto px-3">
-                <img src="../../../../assets/icons/user.svg" width="20" height="20" />
+                <img src="./assets/icons/user.svg" width="20" height="20" />
               </div>
               <div class="col px-0">
                 <input type="text" id="username" class="w-100 ps-2 form-reminder-control"
@@ -40,14 +40,14 @@
             <div class="row mx-0 align-items-center bg-reminder input-reminder-group"
                  [ngClass]="password?.invalid && (password?.dirty || password?.touched) ? 'border border-danger':''">
               <div class="col-auto px-3">
-                <img src="../../../../assets/icons/password.svg" width="20" height="20" />
+                <img src="./assets/icons/password.svg" width="20" height="20" />
               </div>
               <div class="col px-0">
                 <input class="w-100 ps-2 form-reminder-control" type="password" id="password"
                        placeholder="Password" formControlName="password">
               </div>
               <div class="col-auto px-3 clickable" (click)="showPassword()">
-                <img src="../../../../assets/icons/show.svg" width="20" height="20" />
+                <img src="./assets/icons/show.svg" width="20" height="20" />
               </div>
             </div>
             <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="text-danger">
@@ -65,7 +65,7 @@
         </div>
         <div class="mx-0 row justify-content-end ms-auto col-6">
           <button type="submit" class="btn-reminder p-3">
-            <img src="../../../../assets/icons/login.svg" width="20" height="20" />
+            <img src="./assets/icons/login.svg" width="20" height="20" />
             <span class="ps-2">Login</span>
           </button>
           <a routerLink="/register" class="text-end fs-7 text-decoration-none text-reminder mt-2">
