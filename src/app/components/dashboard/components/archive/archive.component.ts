@@ -108,12 +108,14 @@ export class ArchiveComponent implements OnInit {
     this.taskService.deleteTask(task, this.taskList);
   }
 
-  search(searchValue: string) {
-    if (searchValue) {
-      this.filteredTaskList = this.taskService.search(searchValue, this.allArchiveTasks);
-    } else {
-      this.filteredTaskList = [];
+  filter(filteredTaskList: Task[]) {
+    if (filteredTaskList) {
+      this.filteredTaskList = filteredTaskList;
     }
+  }
+
+  search(searching: string) {
+    this.searchValue = searching;
   }
 
   openReminderModal(task: Task) {

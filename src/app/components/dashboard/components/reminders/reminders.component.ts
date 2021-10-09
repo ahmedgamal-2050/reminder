@@ -195,18 +195,6 @@ export class RemindersComponent implements OnInit {
     this.taskService.deleteTask(task, this.taskList);
   }
 
-  onReminderChange(task: Task) {
-
-  }
-
-  search(searchValue: string) {
-    if (searchValue) {
-      this.filteredTaskList = this.taskService.search(searchValue, this.filteredReminderTasks);
-    } else {
-      this.filteredTaskList = [];
-    }
-  }
-
   openReminderModal(task: Task) {
     this.selectedTask = task
     $("#reminderModal").modal('show');
@@ -257,6 +245,16 @@ export class RemindersComponent implements OnInit {
     }
     this.taskService.editReminder(task, this.taskList);
     $("#reminderModal").modal('hide');
+  }
+
+  filter(filteredTaskList: Task[]) {
+    if (filteredTaskList) {
+      this.filteredTaskList = filteredTaskList;
+    }
+  }
+
+  search(searching: string) {
+    this.searchValue = searching;
   }
 }
 

@@ -57,11 +57,13 @@ export class MyPocketComponent implements OnInit {
     this.taskService.taskCompleted(task, this.taskList);
   }
 
-  search(searchValue: string) {
-    if (searchValue) {
-      this.filteredTaskList = this.taskService.search(searchValue, this.doneTaskList);
-    } else {
-      this.filteredTaskList = [];
+  filter(filteredTaskList: Task[]) {
+    if (filteredTaskList) {
+      this.filteredTaskList = filteredTaskList;
     }
+  }
+
+  search(searching: string) {
+    this.searchValue = searching;
   }
 }

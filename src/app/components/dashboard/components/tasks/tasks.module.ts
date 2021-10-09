@@ -23,7 +23,7 @@ const tasksRoutes: Routes = [
     RouterModule.forChild(tasksRoutes),
     ReactiveFormsModule,
     FormsModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class TasksModule { }

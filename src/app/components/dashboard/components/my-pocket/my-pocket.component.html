@@ -1,15 +1,8 @@
 <!-- Search -->
-<div class="row justify-content-center align-items-center p-5">
-  <div class="col-lg-6 col-md-8 col-sm-10">
-    <div class="alert-primary p-2 input-search-group">
-      <span class="search-icon">
-        <img src="../../../../../assets/icons/search.svg" width="20" height="20" />
-      </span>
-      <input type="text" class="ps-2 form-search-control text-primary"
-             placeholder="Search Pocket Task..." [(ngModel)]="searchValue" (input)="search(searchValue)">
-    </div>
-  </div>
-</div>
+<app-search [taskList]="doneTaskList"
+            (filter)="filter($event)"
+            (searching)="search($event)">
+</app-search>
 <!-- Page Title -->
 <div class="alert-success p-3 mb-4 w-100">
   <img src="../../../../../assets/icons/pocket-success.svg" width="20" height="20" />
