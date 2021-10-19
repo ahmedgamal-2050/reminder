@@ -1,28 +1,43 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TasksComponent } from './tasks.component';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EditTaskComponent } from './components/edit-task/edit-task.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EditTaskComponent } from './edit-task/edit-task.component';
 import { SharedModule } from '../../shared/shared.module';
+import { AllTasksComponent } from './all-tasks/all-tasks.component';
 
 const tasksRoutes: Routes = [
   {
     path: 'tasks',
-    component: TasksComponent
+    component: AllTasksComponent
+  },
+  {
+    path: '',
+    loadChildren: () => import('../tasks/reminders/reminders.module').then(m => m.RemindersModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('../tasks/my-pocket/my-pocket.module').then(m => m.MyPocketModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('../tasks/archive/archive.module').then(m => m.ArchiveModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('../tasks/trash/trash.module').then(m => m.TrashModule)
   },
 ];
 
 @NgModule({
   declarations: [
-    TasksComponent,
+    AllTasksComponent,
     EditTaskComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(tasksRoutes),
     ReactiveFormsModule,
-    FormsModule,
     SharedModule,
   ]
 })

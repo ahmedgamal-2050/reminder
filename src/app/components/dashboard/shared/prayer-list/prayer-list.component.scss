@@ -1,0 +1,35 @@
+.bg-fajr {
+  background-color: #efc02f44;
+  color: #333333;
+}
+
+.bg-dhuhr {
+  background-color: #efc02f88;
+  color: #333333;
+}
+
+.bg-asr {
+  background-color: #efc02f;
+  color: #f3f3f3;
+}
+
+.bg-maghrib {
+  background-color: #457afbcc;
+  color: #f3f3f3;
+}
+
+.bg-isha {
+  background-color: #1a237ecc;
+  color: #f3f3f3;
+}
+
+.rounded-pill-top {
+  border-top-left-radius: 6rem !important;
+  border-top-right-radius: 6rem !important;
+}
+
+.prayer-dashboard {
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 371px;
+}

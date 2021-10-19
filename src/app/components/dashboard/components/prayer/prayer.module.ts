@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PrayerComponent } from './prayer.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../../shared/shared.module';
 
 const prayerRoutes: Routes = [
   {
@@ -19,7 +20,8 @@ const prayerRoutes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(prayerRoutes),
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class PrayerModule { }

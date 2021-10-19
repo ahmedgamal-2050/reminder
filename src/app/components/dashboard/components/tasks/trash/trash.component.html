@@ -1,0 +1,45 @@
+<!-- Search -->
+<app-search [taskList]="deletedTaskList"
+            (filter)="filter($event)"
+            (searching)="search($event)">
+</app-search>
+<!-- Page Title -->
+<div class="alert-danger p-3 mb-4 w-100">
+  <img src="../../../../../assets/icons/trash-danger.svg" width="20" height="20" />
+  <span class="ms-2 text-danger">Trash</span>
+</div>
+<!-- Filtered Task Menu -->
+<div *ngIf="filteredTaskList?.length && searchValue">
+  <!-- Task List Menu -->
+  <app-task-list [defaultTaskList]="taskList"
+                 [showedTaskList]="filteredTaskList"
+                 (delete)="deleteTask($event)"
+                 (openReminder)="openReminderModal($event)">
+  </app-task-list>
+</div>
+<!-- Filtered Error Msg -->
+<div *ngIf="!filteredTaskList?.length && searchValue" class="py-3">
+  <div class="alert alert-primary alert-danger w-75 mx-auto">
+    There is no task with that name!!
+  </div>
+</div>
+<!-- All Trash Tasks -->
+<div *ngIf="!filteredTaskList?.length && !searchValue">
+  <!-- Task List Menu -->
+  <app-task-list [defaultTaskList]="taskList"
+                 [showedTaskList]="deletedTaskList"
+                 (delete)="deleteTask($event)"
+                 (openReminder)="openReminderModal($event)">
+  </app-task-list>
+</div>
+
+<!-- Edit Reminder Task Modal -->
+<div class="modal fade" id="reminderModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <app-edit-reminder [selectedTask]="selectedTask"
+                         (edit)="editReminder($event)">
+      </app-edit-reminder>
+    </div>
+  </div>
+</div>

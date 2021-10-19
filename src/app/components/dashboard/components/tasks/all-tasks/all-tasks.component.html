@@ -1,0 +1,70 @@
+<!-- Search -->
+<app-search [taskList]="taskList"
+            (filter)="filter($event)"
+            (searching)="search($event)">
+</app-search>
+<!-- Page Title -->
+<div class="bg-light p-3 mb-4 w-100">
+  <img src="../../../../../assets/icons/tasks.svg" width="20" height="20" />
+  <span class="ms-2 text-primary">Tasks</span>
+</div>
+<!-- Page Content -->
+<!-- Create New Task -->
+<div class="row mx-auto justify-content-between rounded w-75 create-task mb-2"
+     (click)="openModal(emptyTask)">
+  <div class="col-auto p-3">
+    <img src="../../../../../assets/icons/create.svg" width="20" height="20" />
+    <span class="ps-3">Create New Task</span>
+  </div>
+  <div class="col-auto">
+    <div class="row">
+      <div class="col-auto p-3">
+        <img src="../../../../../assets/icons/more-black.svg" width="20" height="20" />
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Filtered Task Menu -->
+<div *ngIf="filteredTaskList?.length && searchValue">
+  <app-task-list [defaultTaskList]="taskList"
+                 [showedTaskList]="filteredTaskList"
+                 (openReminder)="openReminderModal($event)">
+  </app-task-list>
+</div>
+<!-- Filtered Error Msg -->
+<div *ngIf="!filteredTaskList?.length && searchValue" class="py-3">
+  <div class="alert alert-primary alert-danger w-75 mx-auto">
+    There is no task with that name!!
+  </div>
+</div>
+<!-- All Task Menu -->
+<div *ngIf="!filteredTaskList?.length && !searchValue">
+  <app-task-list [defaultTaskList]="taskList"
+                 [showedTaskList]="taskList"
+                 (openReminder)="openReminderModal($event)">
+  </app-task-list>
+</div>
+
+<!-- Create/Edit Task Modal -->
+<div class="modal fade" id="taskModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <app-edit-task (addTask)="createTask($event)"
+                     (editTask)="editTask($event)"
+                     [taskList]="taskList"
+                     [selectedTask]="selectedTask">
+      </app-edit-task>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Reminder Task Modal -->
+<div class="modal fade" id="reminderModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <app-edit-reminder [selectedTask]="selectedTask"
+                         (edit)="editReminder($event)">
+      </app-edit-reminder>
+    </div>
+  </div>
+</div>

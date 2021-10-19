@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Task } from '../../../tasks';
+import { Task } from '../../tasks';
 
 @Component({
   selector: 'app-edit-task',

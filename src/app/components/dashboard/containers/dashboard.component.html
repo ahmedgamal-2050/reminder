@@ -74,7 +74,9 @@
                 <img style="height:34px;width:34px;" height="34" width="34" class="img-fluid rounded-circle border"
                      src="{{currentUser.profilePic ? currentUser.profilePic : '../../assets/icons/profile.svg'}}"/>
               </span>
-              <span class="ms-2" [ngClass]="{'d-none': shrink}">{{ currentUser.username | titlecase }}</span>
+              <span class="ms-2 username-overflow" [ngClass]="{'d-none': shrink}">
+                {{ currentUser.username | titlecase }}
+              </span>
             </div>
             <div class="col-auto" (click)="logout()" *ngIf="!shrink">
               <img src="../../assets/icons/logout.svg" width="20" height="20" />

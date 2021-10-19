@@ -17,23 +17,7 @@ const dashboardRoutes: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('../components/reminders/reminders.module').then(m => m.RemindersModule)
-  },
-  {
-    path: '',
-    loadChildren: () => import('../components/my-pocket/my-pocket.module').then(m => m.MyPocketModule)
-  },
-  {
-    path: '',
     loadChildren: () => import('../components/categories/categories.module').then(m => m.CategoriesModule)
-  },
-  {
-    path: '',
-    loadChildren: () => import('../components/archive/archive.module').then(m => m.ArchiveModule)
-  },
-  {
-    path: '',
-    loadChildren: () => import('../components/trash/trash.module').then(m => m.TrashModule)
   },
   {
     path: '',

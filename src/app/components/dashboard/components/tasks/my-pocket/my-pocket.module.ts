@@ -1,26 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TrashComponent } from './trash.component';
+import { MyPocketComponent } from './my-pocket.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
 
-const trashRoutes: Routes = [
+const myPocketRoutes: Routes = [
   {
-    path: 'trash',
-    component: TrashComponent,
+    path: 'my-pocket',
+    component: MyPocketComponent,
   },
 ];
 
 @NgModule({
   declarations: [
-    TrashComponent
+    MyPocketComponent
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(trashRoutes),
+    RouterModule.forChild(myPocketRoutes),
     FormsModule,
     SharedModule,
   ]
 })
-export class TrashModule { }
+export class MyPocketModule { }

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskService } from '../task.service';
-import { Task } from '../tasks';
+import { TaskService } from '../../task.service';
+import { Task } from '../../tasks';
 declare let $: any;
 
 @Component({
-  selector: 'app-tasks',
-  templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.scss']
+  selector: 'app-all-tasks',
+  templateUrl: './all-tasks.component.html',
+  styleUrls: ['./all-tasks.component.scss']
 })
-export class TasksComponent implements OnInit {
+export class AllTasksComponent implements OnInit {
   public taskList: Task[] = [];
   public selectedTask!: Task;
   public emptyTask!: Task;
@@ -20,6 +20,7 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.taskList = this.taskService.getTaskList();
+    //console.log(this.taskList);
   }
 
   openModal(task: Task) {
@@ -44,38 +45,6 @@ export class TasksComponent implements OnInit {
     this.taskService.updateTask(this.taskList);
     $("#taskModal").modal('hide');
     alert(`${task.taskName} task updated successfully`);
-  }
-
-  toggleTaskMenu(task: Task) {
-    this.taskService.toggleTaskMenu(task, this.taskList);
-  }
-
-  showColorMenu(task: Task) {
-    this.taskService.showColorMenu(task, this.taskList);
-  }
-
-  hideColorMenu(task: Task) {
-    this.taskService.hideColorMenu(task, this.taskList);
-  }
-
-  changeColor(task: Task, color: string) {
-    this.taskService.changeColor(task, this.taskList, color);
-  }
-
-  taskCompleted(task: Task) {
-    this.taskService.taskCompleted(task, this.taskList);
-  }
-
-  togglePinTask(task: Task) {
-    this.taskService.togglePinTask(task, this.taskList);
-  }
-
-  archiveTask(task: Task) {
-    this.taskService.archiveTask(task, this.taskList);
-  }
-
-  deleteTask(task: Task) {
-    this.taskService.deleteTask(task, this.taskList);
   }
 
   filter(filteredTaskList: Task[]) {

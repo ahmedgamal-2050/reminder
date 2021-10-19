@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskService } from '../task.service';
-import { Task } from '../tasks';
+import { TaskService } from '../../task.service';
+import { Task } from '../../tasks';
 declare let $: any;
 
 @Component({
@@ -35,22 +35,6 @@ export class ArchiveComponent implements OnInit {
     }
   }
 
-  toggleTaskMenu(task: Task) {
-    this.taskService.toggleTaskMenu(task, this.taskList);
-  }
-
-  showColorMenu(task: Task) {
-    this.taskService.showColorMenu(task, this.taskList);
-  }
-
-  hideColorMenu(task: Task) {
-    this.taskService.hideColorMenu(task, this.taskList);
-  }
-
-  changeColor(task: Task, color: string) {
-    this.taskService.changeColor(task, this.taskList, color);
-  }
-
   togglePinTask(task: Task) {
     if (task.pinned) {
       for (let i = 0; i < this.pinnedTaskList.length; i++) {
@@ -67,7 +51,6 @@ export class ArchiveComponent implements OnInit {
       }
       this.pinnedTaskList.push(task);
     }
-    this.taskService.togglePinTask(task, this.taskList);
   }
 
   archiveTask(task: Task) {
@@ -84,11 +67,11 @@ export class ArchiveComponent implements OnInit {
         }
       }
     }
-    this.taskService.archiveTask(task, this.taskList);
-  }
-
-  taskCompleted(task: Task) {
-    this.taskService.taskCompleted(task, this.taskList);
+    for (let i = 0; i < this.filteredTaskList.length; i++) {
+      if (this.filteredTaskList[i].id === task.id) {
+        this.filteredTaskList.splice(i, 1);
+      }
+    }
   }
 
   deleteTask(task: Task) {
@@ -105,7 +88,6 @@ export class ArchiveComponent implements OnInit {
         }
       }
     }
-    this.taskService.deleteTask(task, this.taskList);
   }
 
   filter(filteredTaskList: Task[]) {
