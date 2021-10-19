@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import moment from 'moment';
-import { TaskService } from '../task.service';
-import { Task } from '../tasks';
+import { TaskService } from '../../task.service';
+import { Task } from '../../tasks';
 declare let $: any;
 
 @Component({
@@ -84,11 +84,11 @@ export class RemindersComponent implements OnInit {
         }
       }
     }
-    this.taskService.taskCompleted(task, this.taskList);
-  }
-
-  toggleTaskMenu(task: Task) {
-    this.taskService.toggleTaskMenu(task, this.taskList);
+    for (let i = 0; i < this.filteredTaskList.length; i++) {
+      if (this.filteredTaskList[i].id === task.id) {
+        this.filteredTaskList.splice(i, 1);
+      }
+    }
   }
 
   togglePinTask(task: Task) {
@@ -128,7 +128,6 @@ export class RemindersComponent implements OnInit {
       }
       this.pinnedTaskList.push(task);
     }
-    this.taskService.togglePinTask(task, this.taskList);
   }
 
   archiveTask(task: Task) {
@@ -160,7 +159,11 @@ export class RemindersComponent implements OnInit {
         }
       }
     }
-    this.taskService.archiveTask(task, this.taskList);
+    for (let i = 0; i < this.filteredTaskList.length; i++) {
+      if (this.filteredTaskList[i].id === task.id) {
+        this.filteredTaskList.splice(i, 1);
+      }
+    }
   }
 
   deleteTask(task: Task) {
@@ -192,23 +195,15 @@ export class RemindersComponent implements OnInit {
         }
       }
     }
-    this.taskService.deleteTask(task, this.taskList);
-  }
-
-  onReminderChange(task: Task) {
-
-  }
-
-  search(searchValue: string) {
-    if (searchValue) {
-      this.filteredTaskList = this.taskService.search(searchValue, this.filteredReminderTasks);
-    } else {
-      this.filteredTaskList = [];
+    for (let i = 0; i < this.filteredTaskList.length; i++) {
+      if (this.filteredTaskList[i].id === task.id) {
+        this.filteredTaskList.splice(i, 1);
+      }
     }
   }
 
   openReminderModal(task: Task) {
-    this.selectedTask = task
+    this.selectedTask = task;
     $("#reminderModal").modal('show');
   }
 
@@ -250,6 +245,7 @@ export class RemindersComponent implements OnInit {
       if (reminderDate < this.today) {
         this.pastTasks.push(task);
       } else if (reminderDate === this.today) {
+        task.dateStatus = 'today';
         this.todayTasks.push(task);
       } else if (reminderDate > this.today) {
         this.futureTasks.push(task);
@@ -257,6 +253,16 @@ export class RemindersComponent implements OnInit {
     }
     this.taskService.editReminder(task, this.taskList);
     $("#reminderModal").modal('hide');
+  }
+
+  filter(filteredTaskList: Task[]) {
+    if (filteredTaskList) {
+      this.filteredTaskList = filteredTaskList;
+    }
+  }
+
+  search(searching: string) {
+    this.searchValue = searching;
   }
 }
 

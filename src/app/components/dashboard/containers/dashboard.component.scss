@@ -21,3 +21,12 @@
     background-color: #ffffff55;
   }
 }
+
+.username-overflow {
+  width: 110px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: middle;
+  display: inline-block;
+}

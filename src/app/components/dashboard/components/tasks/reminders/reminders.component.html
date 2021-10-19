@@ -1,0 +1,103 @@
+<!-- Search -->
+<app-search [taskList]="filteredReminderTasks"
+            (filter)="filter($event)"
+            (searching)="search($event)">
+</app-search>
+<!-- Filtered Task Menu -->
+<div *ngIf="filteredTaskList?.length && searchValue">
+  <app-task-list [defaultTaskList]="taskList"
+                 [showedTaskList]="filteredTaskList"
+                 (delete)="deleteTask($event)"
+                 (openReminder)="openReminderModal($event)"
+                 (archive)="archiveTask($event)"
+                 (pin)="togglePinTask($event)"
+                 (complete)="taskCompleted($event)">
+  </app-task-list>
+</div>
+<!-- Filtered Error Msg -->
+<div *ngIf="!filteredTaskList?.length && searchValue" class="py-3">
+  <div class="alert alert-primary alert-danger w-75 mx-auto">
+    There is no task with that name!!
+  </div>
+</div>
+<!-- All Reminder Tasks -->
+<div *ngIf="!filteredTaskList?.length && !searchValue">
+  <!-- Pinned Task List -->
+  <div class="mb-5" *ngIf="pinnedTaskList?.length">
+    <div class="alert-warning p-3 mb-4 w-100">
+      <img src="../../../../../assets/icons/pin-warning.svg" width="20" height="20" />
+      <span class="ms-2 text-warning">Pin</span>
+    </div>
+    <!-- Task List Menu -->
+    <app-task-list [defaultTaskList]="taskList"
+                   [showedTaskList]="pinnedTaskList"
+                   (delete)="deleteTask($event)"
+                   (openReminder)="openReminderModal($event)"
+                   (archive)="archiveTask($event)"
+                   (pin)="togglePinTask($event)"
+                   (complete)="taskCompleted($event)">
+    </app-task-list>
+  </div>
+  <!-- Reminder Task List -->
+  <div *ngIf="reminderTaskList?.length">
+    <!-- Today Task List -->
+    <div *ngIf="todayTasks?.length" class="mb-4">
+      <div class="bg-light p-3 mb-4 w-100">
+        <img src="../../../../../assets/icons/time.svg" width="20" height="20" />
+        <span class="ms-2">Today</span>
+      </div>
+      <!-- Task List Menu -->
+      <app-task-list [defaultTaskList]="taskList"
+                     [showedTaskList]="todayTasks"
+                     (delete)="deleteTask($event)"
+                     (openReminder)="openReminderModal($event)"
+                     (archive)="archiveTask($event)"
+                     (pin)="togglePinTask($event)"
+                     (complete)="taskCompleted($event)">
+      </app-task-list>
+    </div>
+    <!-- Future Task List -->
+    <div *ngIf="futureTasks?.length" class="mb-4">
+      <div class="alert-info p-3 mb-4 w-100">
+        <img src="../../../../../assets/icons/future.svg" width="20" height="20" />
+        <span class="ms-2 text-info">Future</span>
+      </div>
+      <!-- Task List Menu -->
+      <app-task-list [defaultTaskList]="taskList"
+                     [showedTaskList]="futureTasks"
+                     (delete)="deleteTask($event)"
+                     (openReminder)="openReminderModal($event)"
+                     (archive)="archiveTask($event)"
+                     (pin)="togglePinTask($event)"
+                     (complete)="taskCompleted($event)">
+      </app-task-list>
+    </div>
+    <!-- Past Task List -->
+    <div *ngIf="pastTasks?.length" class="mb-4">
+      <div class="alert-danger p-3 mb-4 w-100">
+        <img src="../../../../../assets/icons/tasks.svg" width="20" height="20" />
+        <span class="ms-2 text-danger">Past</span>
+      </div>
+      <!-- Task List Menu -->
+      <app-task-list [defaultTaskList]="taskList"
+                     [showedTaskList]="pastTasks"
+                     (delete)="deleteTask($event)"
+                     (openReminder)="openReminderModal($event)"
+                     (archive)="archiveTask($event)"
+                     (pin)="togglePinTask($event)"
+                     (complete)="taskCompleted($event)">
+      </app-task-list>
+    </div>
+  </div>
+
+  <!-- Edit Reminder Task Modal -->
+  <div class="modal fade" id="reminderModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <app-edit-reminder [selectedTask]="selectedTask"
+                           (edit)="editReminder($event)">
+        </app-edit-reminder>
+      </div>
+    </div>
+  </div>
+</div>

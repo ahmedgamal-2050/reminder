@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskService } from '../task.service';
-import { Task } from '../tasks';
+import { TaskService } from '../../task.service';
+import { Task } from '../../tasks';
+declare let $: any;
 
 @Component({
   selector: 'app-trash',
@@ -12,6 +13,7 @@ export class TrashComponent implements OnInit {
   public deletedTaskList: Task[] = [];
   public filteredTaskList: Task[] = [];
   public searchValue: string = '';
+  public selectedTask!: Task;
 
   constructor(private taskService: TaskService) { }
 
@@ -22,25 +24,37 @@ export class TrashComponent implements OnInit {
     })
   }
 
-  toggleTaskMenu(task: Task) {
-    this.taskService.toggleTaskMenu(task, this.taskList);
-  }
-
   deleteTask(task: Task) {
     for (let i = 0; i < this.deletedTaskList.length; i++) {
       if (this.deletedTaskList[i].id === task.id) {
         this.deletedTaskList.splice(i, 1);
       }
     }
-    this.taskService.deleteTask(task, this.taskList);
   }
 
-  search(searchValue: string) {
-    if (searchValue) {
-      this.filteredTaskList = this.taskService.search(searchValue, this.deletedTaskList);
-    } else {
-      this.filteredTaskList = [];
+  filter(filteredTaskList: Task[]) {
+    if (filteredTaskList) {
+      this.filteredTaskList = filteredTaskList;
     }
+  }
+
+  search(searching: string) {
+    this.searchValue = searching;
+  }
+
+  openReminderModal(task: Task) {
+    this.selectedTask = task
+    $("#reminderModal").modal('show');
+  }
+
+  editReminder(task: Task) {
+    this.taskService.editReminder(task, this.taskList);
+    for (let i = 0; i < this.deletedTaskList.length; i++) {
+      if (this.deletedTaskList[i].id === task.id) {
+        this.deletedTaskList[i].reminder = task.reminder;
+      }
+    }
+    $("#reminderModal").modal('hide');
   }
 }
 

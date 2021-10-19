@@ -1,0 +1,8 @@
+.create-task {
+  opacity: 0.5;
+  border: 1px dashed gray;
+
+  &:hover {
+    opacity: 1;
+  }
+}

@@ -2,38 +2,4 @@
   <img src="./assets/icons/prayer.svg" width="20" height="20" />
   <span class="ms-2 text-primary">Prayer</span>
 </div>
-<div class="row justify-content-center w-100" *ngIf="todayPrayers">
-  <div class="col mx-2 rounded-pill-top px-2 text-center"
-        *ngFor="let prayer of todayPrayers"
-        [ngClass]="prayer.background">
-    <div class="py-5">
-      <div style="height:100px;width:100px" class="mx-auto">
-        <span *ngIf="prayer.status === 'time' || prayer.status === 'done'">
-          <img src="{{'./assets/icons/'+ prayer.icon +'.svg'}}" width="100" height="100" />
-        </span>
-      </div>
-      <h4 class="mt-5">{{ prayer.name }}</h4>
-      <div class="pt-3">{{ prayer.timeString }}</div>
-      <div class="pt-3 mx-auto" style="height:32px;width:100px;">
-        <div *ngIf="prayer.status === 'done'">
-          <span class="alert-success rounded-pill py-1 px-2 clickable" (click)="onChangePrayerStatus(prayer)">
-            <img src="./assets/icons/done.svg" width="20" height="20" />
-            <span class="ms-2">Done</span>
-          </span>
-        </div>
-        <div *ngIf="prayer.status === 'time'">
-          <span class="alert-primary rounded-pill py-1 px-2 clickable" (click)="onChangePrayerStatus(prayer)">
-            <img src="./assets/icons/time.svg" width="20" height="20" />
-            <span class="ms-2">Time</span>
-          </span>
-        </div>
-        <div *ngIf="prayer.status === 'missed'">
-          <span class="alert-danger rounded-pill py-1 px-2 clickable" (click)="onChangePrayerStatus(prayer)">
-            <img src="./assets/icons/miss.svg" width="20" height="20" />
-            <span class="ms-2">Miss</span>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<app-prayer-list></app-prayer-list>

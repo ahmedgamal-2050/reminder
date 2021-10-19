@@ -1,0 +1,119 @@
+<div class="row mx-0 justify-content-center mb-4">
+  <div class="col-11">
+    <div class="row justify-content-between rounded border mb-2"
+         [class.pinned]="task.pinned"
+         [ngClass]="task.taskColor && !task.done && !task.deleted ? 'alert-'+ task.taskColor + ' border-'+ task.taskColor : ''"
+         [class.alert-success]="task.done && !task.deleted"
+         [class.border-success]="task.done && !task.deleted"
+         [class.alert-danger]="task.deleted && !task.done"
+         [class.border-danger]="task.deleted && !task.done"
+         *ngFor="let task of showedTaskList">
+      <!-- Left Menu Side -->
+      <div class="col-auto p-3">
+        <div class="d-flex align-items-center">
+          <div class="border rounded clickable" style="height:24px;width:24px;"
+               [ngClass]="(task.taskColor && !task.done && !task.deleted) ? 'border-'+ task.taskColor : ''"
+               [class.bg-success]="task.done"
+               [class.bg-danger]="task.deleted"
+               (click)="taskCompleted(task)"></div>
+          <div class="ms-3 taskName-overflow"
+               [class.text-decoration-line-through]="task.done || task.deleted"
+               [class.text-success]="task.done"
+               [class.text-danger]="task.deleted"
+               [title]="task.taskName">
+            {{task.taskName}}
+          </div>
+          <div class="d-flex" *ngIf="!task.colorMenu">
+            <div class="ms-3 border rounded-pill py-1-5 px-2 fs-8" *ngIf="task.category"
+                 [class.alert-primary]="!task.done && !task.deleted"
+                 [class.border-primary]="!task.done && !task.deleted"
+                 [class.alert-success]="task.done && !task.deleted"
+                 [class.border-success]="task.done && !task.deleted"
+                 [class.alert-danger]="task.deleted && !task.done"
+                 [class.border-danger]="task.deleted && !task.done">
+              {{task.category}}
+            </div>
+            <div class="ms-3 border rounded-pill py-1-5 px-2 fs-8" *ngIf="task.reminder"
+                 [class.alert-primary]="!task.done && !task.deleted"
+                 [class.border-primary]="!task.done && !task.deleted"
+                 [class.alert-success]="task.done && !task.deleted"
+                 [class.border-success]="task.done && !task.deleted"
+                 [class.alert-danger]="task.deleted && !task.done"
+                 [class.border-danger]="task.deleted && !task.done">
+              <img src="../../../../../assets/icons/time.svg" width="14" height="14" />
+              <span class="ms-2">{{ task.dateStatus? task.dateStatus :  task.reminder | date:'dd MMM' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Right Menu Side -->
+      <div class="col-auto d-flex">
+        <!-- Boolean Results -->
+        <div class="col-auto row me-2 align-items-center"
+             *ngIf="(task.done || task.pinned || task.archived || task.deleted) && !task.showMenu && !task.colorMenu">
+          <div class="col me-1" *ngIf="task.done">
+            <img src="../../../../../assets/icons/pocket-success.svg" width="20" height="20" />
+          </div>
+          <div class="col me-1" *ngIf="task.pinned">
+            <img src="../../../../../assets/icons/pin-warning.svg" width="20" height="20" />
+          </div>
+          <div class="col me-1" *ngIf="task.archived">
+            <img src="../../../../../assets/icons/archive-primary.svg" width="20" height="20" />
+          </div>
+          <div class="col me-1" *ngIf="task.deleted">
+            <img src="../../../../../assets/icons/trash-danger.svg" width="20" height="20" />
+          </div>
+        </div>
+        <!-- More Actions -->
+        <div class="bg-dark col-auto row">
+          <div class="col-auto p-3 task-menu" (click)="toggleTaskMenu(task)"
+               data-bs-toggle="tooltip" data-bs-placement="top" title="More">
+            <img src="../../../../../assets/icons/more.svg" width="20" height="20" />
+          </div>
+          <!-- Actions Menu -->
+          <div class="col-auto" *ngIf="task.showMenu && !task.colorMenu">
+            <div class="row">
+              <div class="col p-3 px-4 task-menu"
+                   data-bs-toggle="tooltip" data-bs-placement="top" title="Reminder" (click)="openReminderModal(task)">
+                <img src="../../../../../assets/icons/time.svg" width="20" height="20" />
+              </div>
+              <div class="col p-3 px-4 task-menu" (click)="togglePinTask(task)" *ngIf="!task.deleted"
+                   data-bs-toggle="tooltip" data-bs-placement="top" title="Pin">
+                <img src="{{'../../../../../assets/icons/' + (task.pinned ? 'pin-warning' : 'pin') + '.svg'}}"
+                     width="20" height="20" />
+              </div>
+              <div class="col p-3 px-4 task-menu" (click)="showColorMenu(task)"
+                   data-bs-toggle="tooltip" data-bs-placement="top" title="Color"
+                   *ngIf="!task.done && !task.deleted">
+                <img src="../../../../../assets/icons/color.svg" width="20" height="20" />
+              </div>
+              <div class="col p-3 px-4 task-menu" (click)="archiveTask(task)" *ngIf="!task.deleted"
+                   data-bs-toggle="tooltip" data-bs-placement="top" title="Archive">
+                <img src="{{'../../../../../assets/icons/' + (task.archived ? 'archive-primary' : 'archive') + '.svg'}}"
+                     width="20" height="20" />
+              </div>
+              <div class="col p-3 px-4 task-menu" (click)="deleteTask(task)"
+                   data-bs-toggle="tooltip" data-bs-placement="top" title="Trash">
+                <img src="../../../../../assets/icons/trash.svg" width="20" height="20" />
+              </div>
+            </div>
+          </div>
+          <!-- Color Menu -->
+          <div class="col-auto bg-light" *ngIf="!task.showMenu && task.colorMenu">
+            <div class="row">
+              <div class="col p-3 px-4 task-menu" (click)="hideColorMenu(task)"
+                   data-bs-toggle="tooltip" data-bs-placement="top" title="Color">
+                <img src="../../../../../assets/icons/color-dark.svg" width="20" height="20" />
+              </div>
+              <div class="col p-3 px-4 task-menu"
+                   (click)="changeColor(task, color)"
+                   *ngFor="let color of colorList">
+                <div class="color-circle" [ngClass]="color ? 'bg-'+ color : ''"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

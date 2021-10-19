@@ -1,108 +1,22 @@
 <!-- Search -->
-<div class="row justify-content-center align-items-center p-5">
-  <div class="col-lg-6 col-md-8 col-sm-10">
-    <div class="alert-primary p-2 input-search-group">
-      <span class="search-icon">
-        <img src="./assets/icons/search.svg" width="20" height="20" />
-      </span>
-      <input type="text" class="ps-2 form-search-control text-primary"
-             placeholder="Search Task..." [(ngModel)]="searchValue" (input)="search(searchValue)">
-    </div>
-  </div>
-</div>
+<app-search [taskList]="todayTasks"
+            (filter)="filter($event)"
+            (searching)="search($event)">
+</app-search>
 <!-- Task Title -->
 <div class="bg-light p-3 mb-4 w-100">
   <img src="./assets/icons/time.svg" width="20" height="20" />
   <span class="ms-2">Today</span>
 </div>
 <!-- Filtered Task Menu -->
-<div *ngIf="filteredTaskList?.length && searchValue" class="row justify-content-center mb-4">
-  <div class="col-lg-11">
-    <div class="row mx-auto justify-content-between rounded border mb-2"
-         [class.pinned]="task.pinned"
-         [class.alert-primary]="!task.done && !task.pinned"
-         [class.border-primary]="!task.done && !task.pinned"
-         [class.alert-warning]="!task.done && task.pinned"
-         [class.border-warning]="!task.done && task.pinned"
-         [class.alert-success]="task.done"
-         [class.border-success]="task.done"
-         *ngFor="let task of filteredTaskList">
-      <!-- Left Menu Side -->
-      <div class="col-auto p-3">
-        <div class="d-flex align-items-center">
-          <div class="border rounded clickable"
-               style="height:24px;width:24px;"
-               [class.border-primary]="!task.done && !task.pinned"
-               [class.border-warning]="!task.done && task.pinned"
-               [class.bg-success]="task.done"
-               (click)="taskCompleted(task)"></div>
-          <div class="ms-3"
-               [class.text-decoration-line-through]="task.done">
-            {{task.taskName}}
-          </div>
-          <div class="d-flex" *ngIf="!task.colorMenu">
-            <div class="ms-3 border rounded-pill py-1-5 px-2 fs-8" *ngIf="task.category"
-                 [ngClass]="task.deleted ?'alert-danger border-danger' : 'alert-primary border-primary'">
-              {{task.category}}
-            </div>
-            <div class="ms-3 border rounded-pill py-1-5 px-2 fs-8"
-                 *ngIf="task.reminder && !task.done"
-                 [ngClass]="task.deleted ?'alert-danger border-danger' : 'alert-primary border-primary'">
-              <img src="./assets/icons/time.svg" width="14" height="14" />
-              <span class="ms-2">{{ task.dateStatus? task.dateStatus :  task.reminder | date:'dd MMM' }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Right Menu Side -->
-      <div class="col-auto d-flex">
-        <!-- Boolean Results -->
-        <div class="col-auto row me-2 align-items-center"
-             *ngIf="(task.done || task.pinned || task.archived) && !task.showMenu && !task.colorMenu">
-          <div class="col me-1" *ngIf="task.done">
-            <img src="./assets/icons/pocket-success.svg" width="20" height="20" />
-          </div>
-          <div class="col me-1" *ngIf="task.pinned">
-            <img src="./assets/icons/pin-warning.svg" width="20" height="20" />
-          </div>
-          <div class="col me-1" *ngIf="task.archived">
-            <img src="./assets/icons/archive-primary.svg" width="20" height="20" />
-          </div>
-        </div>
-        <!-- More Actions -->
-        <div class="bg-dark col-auto row">
-          <div class="col-auto p-3 task-menu" (click)="toggleTaskMenu(task)"
-               data-bs-toggle="tooltip" data-bs-placement="top" title="More">
-            <img src="./assets/icons/more.svg" width="20" height="20" />
-          </div>
-          <!-- Actions Menu -->
-          <div class="col-auto" *ngIf="task.showMenu">
-            <div class="row">
-              <div class="col p-3 px-4 task-menu"
-                   data-bs-toggle="tooltip" data-bs-placement="top" title="Reminder"
-                   (click)="openReminderModal(task)">
-                <img src="./assets/icons/time.svg" width="20" height="20" />
-              </div>
-              <div class="col p-3 px-4 task-menu" (click)="togglePinTask(task)"
-                   data-bs-toggle="tooltip" data-bs-placement="top" title="Pin">
-                <img src="{{'./assets/icons/' + (task.pinned ? 'pin-warning' : 'pin') + '.svg'}}"
-                     width="20" height="20" />
-              </div>
-              <div class="col p-3 px-4 task-menu" (click)="archiveTask(task)"
-                   data-bs-toggle="tooltip" data-bs-placement="top" title="Archive">
-                <img src="{{'./assets/icons/' + (task.archived ? 'archive-primary' : 'archive') + '.svg'}}"
-                     width="20" height="20" />
-              </div>
-              <div class="col p-3 px-4 task-menu" (click)="deleteTask(task)"
-                   data-bs-toggle="tooltip" data-bs-placement="top" title="Trash">
-                <img src="./assets/icons/trash.svg" width="20" height="20" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div *ngIf="filteredTaskList?.length && searchValue">
+  <!-- Task List Menu -->
+  <app-task-list [defaultTaskList]="taskList"
+                  [showedTaskList]="filteredTaskList"
+                  (delete)="deleteTask($event)"
+                  (archive)="archiveTask($event)"
+                  (openReminder)="openReminderModal($event)">
+  </app-task-list>
 </div>
 <!-- Filtered Error Msg -->
 <div *ngIf="!filteredTaskList?.length && searchValue" class="py-3 mb-4">
@@ -111,93 +25,14 @@
   </div>
 </div>
 <!-- Today Task List -->
-<div *ngIf="!filteredTaskList?.length && !searchValue" class="row justify-content-center mb-4">
-  <div class="col-lg-11">
-    <div class="row mx-auto justify-content-between rounded border mb-2"
-         [class.pinned]="task.pinned"
-         [class.alert-primary]="!task.done && !task.pinned"
-         [class.border-primary]="!task.done && !task.pinned"
-         [class.alert-warning]="!task.done && task.pinned"
-         [class.border-warning]="!task.done && task.pinned"
-         [class.alert-success]="task.done"
-         [class.border-success]="task.done"
-         *ngFor="let task of todayTasks">
-      <!-- Left Menu Side -->
-      <div class="col-auto p-3">
-        <div class="d-flex align-items-center">
-          <div class="border rounded clickable"
-               style="height:24px;width:24px;"
-               [class.border-primary]="!task.done && !task.pinned"
-               [class.border-warning]="!task.done && task.pinned"
-               [class.bg-success]="task.done"
-               (click)="taskCompleted(task)"></div>
-          <div class="ms-3"
-               [class.text-decoration-line-through]="task.done">
-            {{task.taskName}}
-          </div>
-          <div class="d-flex" *ngIf="!task.colorMenu">
-            <div class="ms-3 border rounded-pill py-1-5 px-2 fs-8" *ngIf="task.category"
-                 [ngClass]="task.deleted ?'alert-danger border-danger' : 'alert-primary border-primary'">
-              {{task.category}}
-            </div>
-            <div class="ms-3 border rounded-pill py-1-5 px-2 fs-8"
-                 *ngIf="task.reminder && !task.done"
-                 [ngClass]="task.deleted ?'alert-danger border-danger' : 'alert-primary border-primary'">
-              <img src="./assets/icons/time.svg" width="14" height="14" />
-              <span class="ms-2">{{ task.dateStatus? task.dateStatus :  task.reminder | date:'dd MMM' }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Right Menu Side -->
-      <div class="col-auto d-flex">
-        <!-- Boolean Results -->
-        <div class="col-auto row me-2 align-items-center"
-             *ngIf="(task.done || task.pinned || task.archived) && !task.showMenu && !task.colorMenu">
-          <div class="col me-1" *ngIf="task.done">
-            <img src="./assets/icons/pocket-success.svg" width="20" height="20" />
-          </div>
-          <div class="col me-1" *ngIf="task.pinned">
-            <img src="./assets/icons/pin-warning.svg" width="20" height="20" />
-          </div>
-          <div class="col me-1" *ngIf="task.archived">
-            <img src="./assets/icons/archive-primary.svg" width="20" height="20" />
-          </div>
-        </div>
-        <!-- More Actions -->
-        <div class="bg-dark col-auto row">
-          <div class="col-auto p-3 task-menu" (click)="toggleTaskMenu(task)"
-               data-bs-toggle="tooltip" data-bs-placement="top" title="More">
-            <img src="./assets/icons/more.svg" width="20" height="20" />
-          </div>
-          <!-- Actions Menu -->
-          <div class="col-auto" *ngIf="task.showMenu">
-            <div class="row">
-              <div class="col p-3 px-4 task-menu"
-                   data-bs-toggle="tooltip" data-bs-placement="top" title="Reminder"
-                   (click)="openReminderModal(task)">
-                <img src="./assets/icons/time.svg" width="20" height="20" />
-              </div>
-              <div class="col p-3 px-4 task-menu" (click)="togglePinTask(task)"
-                   data-bs-toggle="tooltip" data-bs-placement="top" title="Pin">
-                <img src="{{'./assets/icons/' + (task.pinned ? 'pin-warning' : 'pin') + '.svg'}}"
-                     width="20" height="20" />
-              </div>
-              <div class="col p-3 px-4 task-menu" (click)="archiveTask(task)"
-                   data-bs-toggle="tooltip" data-bs-placement="top" title="Archive">
-                <img src="{{'./assets/icons/' + (task.archived ? 'archive-primary' : 'archive') + '.svg'}}"
-                     width="20" height="20" />
-              </div>
-              <div class="col p-3 px-4 task-menu" (click)="deleteTask(task)"
-                   data-bs-toggle="tooltip" data-bs-placement="top" title="Trash">
-                <img src="./assets/icons/trash.svg" width="20" height="20" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div *ngIf="!filteredTaskList?.length && !searchValue">
+  <!-- Task List Menu -->
+  <app-task-list [defaultTaskList]="taskList"
+                  [showedTaskList]="todayTasks"
+                  (delete)="deleteTask($event)"
+                  (archive)="archiveTask($event)"
+                  (openReminder)="openReminderModal($event)">
+  </app-task-list>
 </div>
 
 <div class="row justify-content-center mb-2">
@@ -246,43 +81,7 @@
       </div>
       <!-- Prayers -->
       <div class="col-lg-6">
-        <div class="prayer-dashboard">
-          <div class="d-flex flex-row" *ngIf="todayPrayers">
-            <div class="col mx-2 rounded-pill-top mb-3 px-5 text-center"
-                 *ngFor="let prayer of todayPrayers"
-                 [ngClass]="prayer.background">
-              <div class="py-5">
-                <div style="height:100px;width:100px" class="mx-auto">
-                  <span *ngIf="prayer.status === 'time' || prayer.status === 'done'">
-                    <img src="{{'./assets/icons/'+ prayer.icon +'.svg'}}" width="100" height="100" />
-                  </span>
-                </div>
-                <h4 class="mt-5">{{ prayer.name }}</h4>
-                <div class="pt-3">{{ prayer.timeString }}</div>
-                <div class="pt-3 mx-auto" style="height:32px;width:100px;">
-                  <div *ngIf="prayer.status === 'done'">
-                    <span class="alert-success rounded-pill py-1 px-2 clickable" (click)="onChangePrayerStatus(prayer)">
-                      <img src="./assets/icons/done.svg" width="20" height="20" />
-                      <span class="ms-2">Done</span>
-                    </span>
-                  </div>
-                  <div *ngIf="prayer.status === 'time'">
-                    <span class="alert-primary rounded-pill py-1 px-2 clickable" (click)="onChangePrayerStatus(prayer)">
-                      <img src="./assets/icons/time.svg" width="20" height="20" />
-                      <span class="ms-2">Time</span>
-                    </span>
-                  </div>
-                  <div *ngIf="prayer.status === 'missed'">
-                    <span class="alert-danger rounded-pill py-1 px-2 clickable" (click)="onChangePrayerStatus(prayer)">
-                      <img src="./assets/icons/miss.svg" width="20" height="20" />
-                      <span class="ms-2">Miss</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <app-prayer-list></app-prayer-list>
       </div>
     </div>
   </div>

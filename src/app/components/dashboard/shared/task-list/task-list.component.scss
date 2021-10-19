@@ -1,0 +1,37 @@
+.pinned {
+  border-left-width: 15px !important;
+  border-left-color: orange !important;
+}
+
+.task-menu {
+  cursor: pointer;
+
+  &:hover {
+    background-color: #457AFB33;
+  }
+}
+
+.color-menu {
+  cursor: pointer;
+
+  &:hover {
+    background-color: #457AFB33;
+  }
+}
+
+.color-circle {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  border: 0.5px solid #0d6efd;
+  margin-top: 0.25rem;
+}
+
+.taskName-overflow {
+  max-width: 110px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: middle;
+  display: inline-block;
+}
