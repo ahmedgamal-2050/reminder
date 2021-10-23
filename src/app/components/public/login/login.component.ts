@@ -54,20 +54,15 @@ export class LoginComponent implements OnInit {
         for (let i = 0; i < this.userList.length; i++) {
           if ((this.userList[i].username === this.loginForm.value.username) &&
             (this.userList[i].password === this.loginForm.value.password)) {
-            alert('You are logged in');
+            alert(`Welcome ${this.userList[i].username}, You are logged in`);
             localStorage.setItem('currentUser', JSON.stringify(this.userList[i]));
             this.authService.login();
             this.router.navigate(['/dashboard/prayer']);
-            return;
-          } else {
-            this.loginError = true;
-            alert(`username or password are not correct, Please try again`);
-            return;
           }
         }
       } else {
-        alert(`this username doesn't exist, Please create an account`);
-        return;
+        this.loginError = true;
+        alert(`username or password are not correct, Please try again`);
       }
     } else {
       this.loginForm.markAsTouched;
